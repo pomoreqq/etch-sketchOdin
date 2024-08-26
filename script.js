@@ -1,8 +1,21 @@
 
 let color = 'black'
-
+let click = false;
 document.addEventListener('DOMContentLoaded', () => {
     createGrid(16)
+
+    document.querySelector('body').addEventListener('click', function(e) {
+        if (e.target.tagName == "BUTTON") {
+            click = !click
+            let draw = document.querySelector('.draw')
+            if (click) {
+                draw.textContent = 'U can draw'
+            } else {
+                draw.textContent = 'u cant draw'
+            }
+        }
+    })
+    
     const button = document.querySelector('#sizeButton')
     button.addEventListener('click', function(){
         let size = getSize()
@@ -37,12 +50,14 @@ function createGrid(num) {
 
 
 function colorDiv() {
-   
+   if (click) {
     if (color =='random') {
         this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%,50%)`
     } else {
         this.style.backgroundColor = 'black'
     } 
+   }
+    
 }
 
 
