@@ -11,15 +11,15 @@
     <h1>Etch-A-Sketch</h1>
     <div class="header">
         <h6>select the size</h6>
-        <button>Select</button>
+        <button id="sizeButton" >Select</button>
     </div>
+    <p class="message"></p>
     <div class="container">
-
     </div>
     <div class="buttons">
-       <button>Black</button>
-       <button>Random</button>
-       <button>Reset</button>
+       <button onclick="setColor('black')">Black</button>
+       <button onclick="setColor('random')">Random</button>
+       <button id="resetButton" onclick="setResetBoard()" >Reset</button>
     </div>
    
     

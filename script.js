@@ -1,9 +1,18 @@
 
-
+let color = 'black'
 
 document.addEventListener('DOMContentLoaded', () => {
     createGrid(16)
-
+    const button = document.querySelector('#sizeButton')
+    button.addEventListener('click', function(){
+        let size = getSize()
+        createGrid(size)
+    })
+   
+    const resetButton = document.querySelector('#resetButton')
+    resetButton.addEventListener('click',setResetBoard)
+   
+    
 })
 
 function createGrid(num) {
@@ -17,6 +26,9 @@ function createGrid(num) {
         baseDiv.classList.add('gridDiv')
         baseDiv.style.flex = `0 0 ${gridContainerSize}%`
         baseDiv.style.height = `${gridContainerSize}%`
+        
+        baseDiv.addEventListener('mouseover', colorDiv)
+
         container.appendChild(baseDiv)
     }
 
@@ -24,4 +36,43 @@ function createGrid(num) {
 }
 
 
+function colorDiv() {
+   
+    if (color =='random') {
+        this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%,50%)`
+    } else {
+        this.style.backgroundColor = 'black'
+    } 
+}
 
+
+function setColor (colorChoice) {
+    color = colorChoice
+    
+}
+
+function getSize() {
+    let choice = prompt('Input a size of the board')
+    let message = document.querySelector('.message')
+    if (choice == '') {
+        message.textContent = 'Please provide a number'
+        message.style.color = 'red'
+        message.style.fontSize = '24px'
+        message.style.fontWeight = 'bold'
+    } else if (choice > 100 || choice < 0) {
+        message.textContent = 'Size must be lower than 100 and higher than 0 '
+        message.style.color = 'red'
+        message.style.fontSize = '24px'
+        message.style.fontWeight = 'bold'
+    } else {
+        return choice
+    }
+    
+}
+
+function setResetBoard() {
+    let divs = document.querySelectorAll('.gridDiv')
+    divs.forEach((div) =>  {
+        return div.style.backgroundColor = 'white'
+    })
+}
